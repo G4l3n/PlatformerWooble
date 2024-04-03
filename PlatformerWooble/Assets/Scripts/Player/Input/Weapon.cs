@@ -10,6 +10,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float _pointerSpeed;
     [SerializeField] private Pointer _pointerScript;
     [SerializeField] private Laser _laser;
+    [SerializeField] private Reload _reload;
+    [SerializeField] private Switch _switch;
+    [HideInInspector] public float AmountToShoot = 0.5f;
     private bool _isShooting;
     private float _pointerHorizontal;
     private float _pointerVertical;
@@ -19,7 +22,15 @@ public class Weapon : MonoBehaviour
         _pointerRb2D.velocity = new Vector2(_pointerHorizontal * _pointerSpeed, _pointerVertical * _pointerSpeed);
         if (_isShooting)
         {
-            _laser.ShootLaser();
+            if (_reload.Magazine > 0 && _switch.Night)
+            {
+                _laser.ShootLaser();
+                _reload.Magazine -= AmountToShoot;
+            }
+            else
+            {
+                _laser.StopShooting();
+            }
         }
         else
         {
@@ -56,6 +67,14 @@ public class Weapon : MonoBehaviour
         if (context.canceled)
         {
             return;
+        }
+    }
+
+    public void OnSwitch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _switch.Switching();
         }
     }
 }

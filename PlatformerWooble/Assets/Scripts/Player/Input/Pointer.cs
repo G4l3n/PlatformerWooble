@@ -11,4 +11,9 @@ public class Pointer : MonoBehaviour
         pointer.z = 0;
         transform.position = pointer;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("fzfffz'f");
+    }
 }

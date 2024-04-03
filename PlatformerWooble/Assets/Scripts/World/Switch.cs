@@ -9,24 +9,21 @@ public class Switch : MonoBehaviour
 
     public bool Night = false;
 
-
-    void Update()
+    public void Switching()
     {
-        if (Input.GetKeyDown(KeyCode.P) && Night == false)
+        if (!Night)
         {
-            Debug.Log("aa");
             NightObject.SetActive(true);
             DayObject.SetActive(false);
 
-            Night = true;
+            Night = !Night;
         }
-        else if (Input.GetKeyDown(KeyCode.P) && Night == true)
+        else if (Night)
         {
             DayObject.SetActive(true);
             NightObject.SetActive(false);
 
-            Night = false;
+            Night = !Night;
         }
-
     }
 }
