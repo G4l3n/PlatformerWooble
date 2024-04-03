@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Damage : MonoBehaviour
 {
-    List<GameObject> _healt;
+    public List<GameObject> Healt;
+
 
     void Update()
     {
-        if (_healt.Count == 0)
+        if (Healt.Count == 0)
         {
             Debug.Log("MORT");
         }
@@ -18,11 +20,19 @@ public class Damage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ennemy"))
         {
-            for (int i = 0; i < _healt.Count; i--)
+            for (int i = 0; i < Healt.Count; i--)
             {
-                _healt.RemoveAt(i);
+                Healt[i].transform.DOScale(0, 0.5f);
+                StartCoroutine(Die());
             }
         }
+    }
+
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Healt.RemoveAt(0);
+        StopCoroutine(Die());
     }
 
 }
