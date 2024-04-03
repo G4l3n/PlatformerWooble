@@ -9,10 +9,6 @@ public class Laser : MonoBehaviour
     [SerializeField] private Transform _pointer;
     [SerializeField] private LineRenderer _lineRenderer;
 
-    private void Awake()
-    {
-        _transform = GetComponent<Transform>();
-    }
 
     public void ShootLaser()
     {
