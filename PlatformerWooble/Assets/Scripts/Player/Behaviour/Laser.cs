@@ -5,9 +5,11 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     [SerializeField] private float _maxDistanceRay = 40f;
+    [SerializeField] private float _weaponDmg;
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private Transform _pointer;
     [SerializeField] private LineRenderer _lineRenderer;
+    [SerializeField] private EnemyLife _enemyLife;
 
 
     public void ShootLaser()
@@ -19,8 +21,7 @@ public class Laser : MonoBehaviour
             Draw2DRay(_shootingPoint.position, _2DHit.point);
             if (_2DHit.transform.CompareTag("Enemy"))
             {
-                //dmg
-                Debug.Log("piou piou");
+                _enemyLife.TakeDmg(_weaponDmg);
             }
         }
         else 

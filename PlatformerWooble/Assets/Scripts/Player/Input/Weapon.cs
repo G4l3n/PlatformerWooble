@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
@@ -12,7 +13,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Laser _laser;
     [SerializeField] private Reload _reload;
     [SerializeField] private Switch _switch;
-    [HideInInspector] public float AmountToShoot = 0.5f;
+    [SerializeField] private UnityEvent _shooting;
+    [HideInInspector] public float AmountToShoot = 1f;
     private bool _isShooting;
     private float _pointerHorizontal;
     private float _pointerVertical;
@@ -25,7 +27,8 @@ public class Weapon : MonoBehaviour
             if (_reload.Magazine > 0 && _switch.Night)
             {
                 _laser.ShootLaser();
-                _reload.Magazine -= AmountToShoot;
+                _reload.Magazine -= AmountToShoot * 100 * Time.deltaTime;
+                _shooting?.Invoke();
             }
             else
             {
