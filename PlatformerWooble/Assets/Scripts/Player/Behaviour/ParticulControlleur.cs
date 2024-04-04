@@ -8,6 +8,9 @@ public class ParticulControlleur : MonoBehaviour
     [SerializeField]
     ParticleSystem _particleSystem;
 
+    //[SerializeField]
+    //ParticleSystem _fallSystem;
+
     [Range(0, 10)]
     [SerializeField] int _occurAfterVelocity;
 
@@ -18,13 +21,13 @@ public class ParticulControlleur : MonoBehaviour
     Rigidbody2D _rigidbody2;
 
     float _counter;
-    bool _isOnGround;
+    //bool _isOnGround;
 
     private void Update()
     {
         _counter += Time.deltaTime;
 
-        if(_isOnGround && Mathf.Abs(_rigidbody2.velocity.x) > _occurAfterVelocity)
+        if(/*_isOnGround &&*/ Mathf.Abs(_rigidbody2.velocity.x) > _occurAfterVelocity)
         {
             if(_counter > _dustFormationPeriod)
             {
@@ -36,17 +39,18 @@ public class ParticulControlleur : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Floor"))
         {
-            _isOnGround = true;
+            //_fallSystem.Play();
+            //_isOnGround = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground"))
+        if (collision.CompareTag("Floor"))
         {
-            _isOnGround = true;
+            //_isOnGround = false;
         }
     }
 }

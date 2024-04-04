@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CheckFloor _checkFloor;
     private float jumpForce;
     private float horizontal;
+
+    public ParticleSystem Dust;
 
     private void Start()
     {
@@ -32,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         horizontal = context.ReadValue<Vector2>().x;
         if (context.canceled)
         {
+            Dust.Play();
             rb2D.velocity = Vector2.zero;
         }
     }
