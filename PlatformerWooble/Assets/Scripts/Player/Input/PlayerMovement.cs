@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int jumpAmount;
     [SerializeField] private PlayerStats stats;
     [SerializeField] private CheckFloor _checkFloor;
+    [SerializeField] private float durationOfLerp;
     private float jumpForce;
     private float horizontal;
 
@@ -35,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
         if (context.canceled)
         {
             Dust.Play();
-            rb2D.velocity = Vector2.zero;
         }
     }
 
@@ -58,4 +59,19 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+
+    //private IEnumerator MoveStart(float floatToLerp, float maxFloat, float duration)
+    //{
+    //    float _actualTime = 0;
+    //    Vector2 startPosition = transform.position;
+    //    while (_actualTime < duration)
+    //    {
+    //        floatToLerp = Mathf.Lerp(0, maxFloat, _actualTime / duration);
+    //        _actualTime += Time.deltaTime;
+    //        yield return null;
+    //    }
+    //    _playerSpeed = horizontal;
+    //    yield return null;
+    //}
 }
