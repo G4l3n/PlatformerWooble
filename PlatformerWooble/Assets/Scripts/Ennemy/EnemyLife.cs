@@ -15,9 +15,9 @@ public class EnemyLife : MonoBehaviour
             Debug.Log("takingdmg");
             _hp -= dmgTaken;
             Color c = this.GetComponent<SpriteRenderer>().color;
-            c.r += .0015f;
-            c.g += .0015f;
-            c.b += .0015f;
+            c.r += dmgTaken / 100;
+            c.g += dmgTaken / 100;
+            c.b += dmgTaken / 100;
             GetComponent<SpriteRenderer>().color = c;
         }
         if (_hp <= 0)

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class FlipPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject _weapon;
     [SerializeField] private bool asTurned;
     [SerializeField] private Transform _pointer;
     private float rotationZ;
@@ -22,11 +23,13 @@ public class FlipPlayer : MonoBehaviour
             if (rotationZ > 95 && rotationZ < 180)
             {
                 Player.transform.Rotate(new Vector3(0, 180, 0));
+                _weapon.transform.localScale = new Vector3(-1 , -1, 1);
                 asTurned = true;
             }
             else if (rotationZ < -95 && rotationZ > -180)
             {
                 Player.transform.Rotate(new Vector3(0, 180, 0));
+                _weapon.transform.localScale = new Vector3(-1, -1, 1);
                 asTurned = true;
             }
         }
@@ -35,11 +38,13 @@ public class FlipPlayer : MonoBehaviour
             if (rotationZ < 86 && rotationZ > 0)
             {
                 Player.transform.Rotate(new Vector3(0, 180, 0));
+                _weapon.transform.localScale = new Vector3(-1, 1, 1);
                 asTurned = false;
             }
             else if (rotationZ > -86 && rotationZ < 0)
             {
                 Player.transform.Rotate(new Vector3(0, 180, 0));
+                _weapon.transform.localScale = new Vector3(-1, 1, 1);
                 asTurned = false;
             }
         }

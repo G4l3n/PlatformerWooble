@@ -12,10 +12,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     [SerializeField] private CheckFloor _checkFloor;
     [SerializeField] private float durationOfLerp;
+    [SerializeField] private Animator _playerAnim;
+
     private float jumpForce;
     private float horizontal;
 
-    public ParticleSystem Dust;
+    //public ParticleSystem Dust;
 
     private void Start()
     {
@@ -29,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpAmount = stats.AmountOfJump;
         }
+        _playerAnim.SetFloat("PlayerSpeed", Mathf.Abs(rb2D.velocity.x));
+        Debug.Log(_playerAnim.GetFloat("PlayerSpeed"));
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -36,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         horizontal = context.ReadValue<Vector2>().x;
         if (context.canceled)
         {
-            Dust.Play();
+            //Dust.Play();
         }
     }
 
@@ -52,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb2D.velocity = new Vector2(rb2D.velocity.x, jumpForce);
                 jumpAmount -= 1;
+                _playerAnim.SetBool("IsGrounded", false);
+                Debug.Log("jump");
             }
         }
         if (context.canceled)

@@ -50,6 +50,7 @@ public class Weapon : MonoBehaviour
         if (context.canceled)
         {
             _isShooting = false;
+            _laser._shooting = false;
         }
     }
 

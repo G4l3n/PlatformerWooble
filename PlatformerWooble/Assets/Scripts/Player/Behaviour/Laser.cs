@@ -10,18 +10,29 @@ public class Laser : MonoBehaviour
     [SerializeField] private Transform _pointer;
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private EnemyLife _enemyLife;
+    [HideInInspector] public bool _shooting;
+    private RaycastHit2D _2DHit;
 
+
+    private void FixedUpdate()
+    {
+        if (_shooting)
+        {
+            _2DHit.collider.GetComponent<EnemyLife>().TakeDmg(_weaponDmg);
+        }
+        Debug.Log("shooting = " + _shooting);
+    }
 
     public void ShootLaser()
     {
         _lineRenderer.enabled = true;
         if (Physics2D.Raycast(_shootingPoint.position, transform.right, _maxDistanceRay))
         {
-            RaycastHit2D _2DHit = Physics2D.Raycast(_shootingPoint.position, transform.right);
+            _2DHit = Physics2D.Raycast(_shootingPoint.position, transform.right);
             Draw2DRay(_shootingPoint.position, _2DHit.point);
             if (_2DHit.transform.CompareTag("Enemy"))
             {
-                _enemyLife.TakeDmg(_weaponDmg);
+                _shooting = true;
             }
         }
         else 
