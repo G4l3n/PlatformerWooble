@@ -9,6 +9,11 @@ public class Switch : MonoBehaviour
 
     public bool Night = false;
 
+    private void Start()
+    {
+        Night = false;
+    }
+
     public void Switching()
     {
         if (!Night)
